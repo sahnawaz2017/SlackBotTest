@@ -2,7 +2,7 @@
 'use strict';
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 4205;
+const port = process.env.PORT || 8080;
 const router = express.Router();
 
 process.env.token = 'xoxb-197296342337-NcAr4XFcb529ZUagnfMNXPER';
@@ -52,3 +52,8 @@ controller.hears(['.*'], ['direct_message', 'direct_mention'], (bot, message) =>
 			controller.log('Slack message received');
 			bot.reply(message, 'I have received your message!');
 		});
+
+
+app.listen(port, function() {
+	console.log('Our app is running on http://localhost:' + port);
+});
