@@ -5,26 +5,14 @@ const app = express();
 const port = process.env.PORT || 8080;
 const router = express.Router();
 
-process.env.token = 'xoxb-197296342337-NcAr4XFcb529ZUagnfMNXPER';
+process.env.token = '';
 
 //var chatbots = require("./chatbots.js");
 //chatbots.fn.slackBot();
 if (!process.env.token) {
     console.log('Error: Specify token in environment');
-    process.exit(1);
+    //process.exit(1);
 }
-
-var Botkit = require('./node_modules/botkit/lib/Botkit.js');
-var os = require('os');
-
-var controller = Botkit.slackbot({
-    debug: false,
-});
-
-var bot = controller.spawn({
-    token: process.env.token
-}).startRTM();
-
 
 // controller.hears(['hello', 'hi', 'wassup'], 'direct_message,direct_mention,mention', function(bot, message) {
 
@@ -48,11 +36,27 @@ var bot = controller.spawn({
 //     // });
 // });
 
+app.get('/setToken', function(request, response) {
+    process.env.token = request.query.token;
+
+var Botkit = require('./node_modules/botkit/lib/Botkit.js');
+var os = require('os');
+
+var controller = Botkit.slackbot({
+    debug: false,
+});
+
+var bot = controller.spawn({
+    token: process.env.token
+}).startRTM();
+
 controller.hears(['.*'], ['direct_message', 'direct_mention'], (bot, message) => {
 			controller.log('Slack message received');
 			bot.reply(message, 'I have received your message!');
 		});
 
+    response.end("I have received the ID: " + process.env.token);
+});
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
