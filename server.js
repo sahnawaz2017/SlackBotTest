@@ -54,7 +54,8 @@ controller.hears(['.*'], 'direct_message,direct_mention', (bot, message) => {
 			controller.log('Slack message received');
 			bot.api.users.info({user: message.user}, function(err, info){
     			//check if it's the right user using info.user.name or info.user.id
-    			bot.reply(message, info.user.name)
+    			bot.reply(message, 'I have received your message 
+    				info.user.name);
   			});
 	//bot.reply(message, 'I have received your message!');
 		});
