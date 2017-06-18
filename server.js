@@ -55,8 +55,15 @@ controller.hears(['.*'], ['direct_message', 'direct_mention'], (bot, message) =>
 			bot.reply(message, 'I have received your message!');
 		});
 
+controller.hears(['.*'], ['message', 'mention'], (bot, message) => {
+			controller.log('Slack message received');
+			bot.reply(message, 'Please use direct message instead...');
+		});
+
     response.end("I have received the ID: " + process.env.token);
 });
+
+
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
