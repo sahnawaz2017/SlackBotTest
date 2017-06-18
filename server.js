@@ -50,7 +50,7 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
-controller.hears(['.*'], ['direct_message', 'direct_mention'], (bot, message) => {
+controller.hears(['.*'], 'direct_message,direct_mention', (bot, message) => {
 			controller.log('Slack message received');
 			bot.api.users.info({user: message.user}, function(err, info){
     			//check if it's the right user using info.user.name or info.user.id
@@ -59,7 +59,7 @@ controller.hears(['.*'], ['direct_message', 'direct_mention'], (bot, message) =>
 	//bot.reply(message, 'I have received your message!');
 		});
 
-controller.hears(['.*'], ['mention'], (bot, message) => {
+controller.hears(['.*'], 'mention', (bot, message) => {
 			controller.log('Slack message received');
 			bot.reply(message, 'Please use direct message instead...');
 		});
