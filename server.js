@@ -36,8 +36,9 @@ controller.hears(['.*'], 'direct_message', (bot, message) => {
 
             var j=5; var i=1;
             while(i++<j){
-
+setTimeout(function(){
             bot.reply(message, 'I have received your message '+ info.user.name + ' '+i);
+        }, 1000);
                 }
             
             });    
