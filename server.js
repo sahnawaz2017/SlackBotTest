@@ -57,15 +57,15 @@ app.listen(port, function() {
 
 // /(?:^|\s)^chg[0-9]{7,}/gi - chg12345678 regex
 
-function Test(bot,i,j,message)
+function Test(bot1,i,j,message1)
 {
-    bot.reply(message, 'I have received your message '+ info.user.name + ' '+i);
+    bot1.reply(message1, 'I have received your message  '+i);
 
     if(++i<j)
     {
         setTimeout(function(){
              
-                   Test(i, j);
+                   Test(bot1,i,j,message1);
             }, 1000);               
     }
 }
