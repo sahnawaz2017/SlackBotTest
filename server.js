@@ -54,8 +54,15 @@ controller.hears(['.*'], 'direct_message', (bot, message) => {
 			controller.log('Slack message received');
 			bot.api.users.info({user: message.user}, function(err, info){
     			//check if it's the right user using info.user.name or info.user.id
-    			bot.reply(message, 'I have received your message '+
-    				info.user.name);
+
+            if(message.match[0].match(/(?i)^chg\d{7,}/))
+            {
+            	bot.reply(message, 'You typed a change request');
+            }
+            else
+            {
+    			bot.reply(message, 'I have received your message '+	info.user.name);
+    		}
 
   			});
 	//bot.reply(message, 'I have received your message!');
@@ -74,3 +81,5 @@ controller.hears(['.*'], 'mention,direct_mention', (bot, message) => {
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
 });
+
+// (?i)^chg\d{7,} - chg12345678 regex
