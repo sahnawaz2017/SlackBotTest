@@ -55,14 +55,14 @@ controller.hears(['.*'], 'direct_message', (bot, message) => {
 			bot.api.users.info({user: message.user}, function(err, info){
     			//check if it's the right user using info.user.name or info.user.id
 
-            if(message.match[0].match(/(?i)^chg\d{7,}/))
-            {
-            	bot.reply(message, 'You typed a change request');
-            }
-            else
-            {
-    			bot.reply(message, 'I have received your message '+	info.user.name);
-    		}
+      //       if(message.match[0].match(/(?i)^chg\d{7,}/))
+      //       {
+      //       	bot.reply(message, 'You typed a change request');
+      //       }
+      //       else
+      //       {
+    		 	bot.reply(message, 'I have received your message '+	info.user.name);
+    		// }
 
   			});
 	//bot.reply(message, 'I have received your message!');
