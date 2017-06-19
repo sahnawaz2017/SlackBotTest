@@ -14,28 +14,6 @@ if (!process.env.token) {
     //process.exit(1);
 }
 
-// controller.hears(['hello', 'hi', 'wassup'], 'direct_message,direct_mention,mention', function(bot, message) {
-
-//     bot.api.reactions.add({
-//         timestamp: message.ts,
-//         channel: message.channel,
-//         name: 'robot_face',
-//     }, function(err, res) {
-//         if (err) {
-//             bot.botkit.log('Failed to add emoji reaction :(', err);
-//         }
-//     });
-
-//  bot.reply(message, 'Hello ' + message.user);
-//     // controller.storage.users.get(message.user, function(err, user) {
-//     //     if (user && user.name) {
-//     //         bot.reply(message, 'Hello ' + user.name + '!!');
-//     //     } else {
-//     //         bot.reply(message, 'Hello.');
-//     //     }
-//     // });
-// });
-
 app.get('/setToken', function(request, response) {
     process.env.token = request.query.token;
 
@@ -51,27 +29,24 @@ var bot = controller.spawn({
 }).startRTM();
 
 controller.hears(['.*'], 'direct_message', (bot, message) => {
-			controller.log('Slack message received');
-			bot.api.users.info({user: message.user}, function(err, info){
-    			//check if it's the right user using info.user.name or info.user.id
+            controller.log('Slack message received');
+            bot.api.users.info({user: message.user}, function(err, info){
+                
+            var msg = message.match[0];
 
-      //       if(message.match[0].match(/(?i)^chg\d{7,}/))
-      //       {
-      //       	bot.reply(message, 'You typed a change request');
-      //       }
-      //       else
-      //       {
-    		 	bot.reply(message, 'I have received your message '+	info.user.name);
-    		// }
+            var j=5; var i=1;
+            while(i++<j){
 
-  			});
-	//bot.reply(message, 'I have received your message!');
-		});
+            bot.reply(message, 'I have received your message '+ info.user.name + ' '+i);
+                }
+            
+            });    
+        });
 
 controller.hears(['.*'], 'mention,direct_mention', (bot, message) => {
-			controller.log('Slack message received');
-			bot.reply(message, 'Please use direct message instead.');
-		});
+            controller.log('Slack message received');
+            bot.reply(message, 'Please use direct message instead.');
+        });
 
     response.end("I have received the ID: " + process.env.token);
 });
@@ -79,7 +54,7 @@ controller.hears(['.*'], 'mention,direct_mention', (bot, message) => {
 
 
 app.listen(port, function() {
-	console.log('Our app is running on http://localhost:' + port);
+    console.log('Our app is running on http://localhost:' + port);
 });
 
-// (?i)^chg\d{7,} - chg12345678 regex
+// /(?:^|\s)^chg[0-9]{7,}/gi - chg12345678 regex
