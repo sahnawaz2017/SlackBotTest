@@ -70,7 +70,7 @@ controller.hears(['.*'], 'direct_message', (bot, message) => {
 
 controller.hears(['.*'], 'mention,direct_mention', (bot, message) => {
 			controller.log('Slack message received');
-			bot.reply(message, 'Please use direct message instead...');
+			bot.reply(message, 'Please use direct message instead.');
 		});
 
     response.end("I have received the ID: " + process.env.token);
