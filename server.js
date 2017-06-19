@@ -35,11 +35,8 @@ controller.hears(['.*'], 'direct_message', (bot, message) => {
             var msg = message.match[0];
 
             var j=5; var i=1;
-            while(i++<j){
-setTimeout(function(){
-            bot.reply(message, 'I have received your message '+ info.user.name + ' '+i);
-        }, 1000);
-                }
+           
+            Test(i,j);
             
             });    
         });
@@ -59,3 +56,16 @@ app.listen(port, function() {
 });
 
 // /(?:^|\s)^chg[0-9]{7,}/gi - chg12345678 regex
+
+function Test(i,j)
+{
+    bot.reply(message, 'I have received your message '+ info.user.name + ' '+i);
+
+    if(++i<j)
+    {
+        setTimeout(function(){
+             
+                   Test(i, j);
+            }, 1000);               
+    }
+}
