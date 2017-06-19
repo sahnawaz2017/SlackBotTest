@@ -36,7 +36,7 @@ controller.hears(['.*'], 'direct_message', (bot, message) => {
 
             var j=5; var i=1;
            
-            Test(i,j);
+            Test(bot,i,j);
             
             });    
         });
@@ -57,7 +57,7 @@ app.listen(port, function() {
 
 // /(?:^|\s)^chg[0-9]{7,}/gi - chg12345678 regex
 
-function Test(i,j)
+function Test(bot,i,j)
 {
     bot.reply(message, 'I have received your message '+ info.user.name + ' '+i);
 
