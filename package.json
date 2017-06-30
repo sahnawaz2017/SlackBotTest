@@ -8,6 +8,10 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "ejs": "^1.0.0",
-    "express": "^4.9.8"
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.0.0",
+    "servicenow": "^0.5.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
